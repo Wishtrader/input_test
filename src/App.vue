@@ -1,47 +1,54 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import Input from './components/Input/Input.vue'
+import UserIcon from '@/components/Input/UserIcon.vue'
+import {ref} from 'vue'
+
+const name1 = ref('')
+const name2 = ref('')
+const inputRef = ref(null)
+
+const rules = [
+  v => !!v || 'This field is required',
+  v => v.length >= 3 || 'Minimum 3 letters'
+]
+
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <h1>Test input 1</h1>
+  <Input
+      ref="inputRef"
+      v-model="name1"
+      label="Name"
+      placeholder="Enter Your Name"
+      :icon="UserIcon"
+      :rules="rules"
+      required
+      :validate-on-input="true"
+      :show-error-icon="true"
+      :show-icon="false"
+  />
+  <h1>Test input 2</h1>
+  <Input
+      ref="inputRef"
+      v-model="name2"
+      label="Name"
+      placeholder="Enter Your Name"
+      :icon="UserIcon"
+      :rules="rules"
+      required
+      :validate-on-input="true"
+      :show-error-icon="true"
+      :show-icon="true"
+  />
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
+
+h1 {
+  font-size: 32px;
+  text-transform: uppercase;
+  text-align: center;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
 </style>
